@@ -206,6 +206,37 @@
 
     }
 
+    @media (max-width:720px) {
+      .hero-lead.no-truncate {
+        display: block !important;
+        -webkit-line-clamp: unset !important;
+        -webkit-box-orient: unset !important;
+        overflow: visible !important;
+        max-height: none !important;
+      }
+    }
+
+    img {
+      border-radius: 12px;
+    }
+
+    /* Большая демонстрационная карточка — совпадает с радиусом контейнера */
+    .visual-left .big-image img {
+      border-radius: 32px;
+    }
+
+    /* Небольшые скриншоты в правой панели: чуть мягче */
+    .screenshot img {
+      border-radius: 12px;
+    }
+
+    /* На очень маленьких экранах, где мы меняем форму картинки, немного уменьшить радиус */
+    @media (max-width:420px){
+      .visual-left .big-image img { border-radius: 20px; }
+      .screenshot img { border-radius: 12px; }
+    }
+
+
     /* Very small screens / narrow devices */
     @media (max-width:420px){
       :root{--pad:16px}
@@ -361,7 +392,7 @@
       <!-- LEFT: text -->
       <div>
         <h1 class="hero-title">Проекты уровня университета — для школьников</h1>
-        <p class="hero-lead">
+        <p class="hero-lead no-truncate">
           Сопровождаем маленькие команды (1–2 человека) в создании настоящих инженерных проектов:
           собственные языки, компиляторы, JIT и низкоуровневые backend'ы.
         </p>
@@ -370,7 +401,7 @@
           Поступление без ЕГЭ (по результатам олимпиад) — реальная цель
         </div>
 
-        <p class="hero-lead" style="margin-top:12px">
+        <p class="hero-lead no-truncate" style="margin-top:12px">
           Наша работа направлена на победы в профильных олимпиадах и конкурсах — это именно тот путь,
           который часто позволяет поступить в ведущие вузы по специальным условиям приёма.
         </p>
