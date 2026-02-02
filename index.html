@@ -163,6 +163,78 @@
 
       /* Slightly increase input size for mobile */
       input,textarea{font-size:16px;padding:14px}
+
+      /* ---------- Mobile-only fixes requested previously ---------- */
+
+      /* Keep header container padding so "PD" is not flush to the edge */
+      header.site-header .container {
+        padding-left: var(--pad) !important;
+        padding-right: var(--pad) !important;
+      }
+      .header-inner { padding-left: 0; padding-right: 0; }
+
+      /* Reduce large top-margin for demo card on mobile */
+      .demo-card {
+        margin-top: 12px !important;
+        padding-top: 16px;
+      }
+      .visual-left .big-image { min-height: 180px; }
+
+      /* Reduce vertical spacing for the right-side screenshot (hero panel) */
+      .hero { padding: 32px 0 12px; }
+      .hero-grid { gap: 12px; }
+      .panel.card { padding: 14px; }
+      .screenshot { height: 140px; }
+
+      /* Nudge the list slightly left (less indentation) */
+      .visual-right ul { margin-left: 8px !important; }
+
+      .visual-left .big-image img { width:100%; object-position:center center; max-width: none; }
+
+      /* ---------- NEW MOBILE CHANGES (this update) ---------- */
+
+      /* 1) Make "Демонстрация проекта" image fully visible on mobile (no cropping) */
+      /*    Use object-fit: contain so the whole image is shown; keep container height to control layout */
+      .screenshot img {
+        object-fit: contain !important;
+        object-position: center center !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      /* Also ensure the "demo" big-image (мини-язык) also uses contain so both match visually */
+      .visual-left .big-image img {
+        object-fit: contain !important;
+        object-position: center center !important;
+        width: 100% !important;
+        height: auto !important;
+        max-height: 220px;
+      }
+      /* adjust big-image container so it doesn't force an oversized box */
+      .visual-left .big-image { min-height: 140px; max-height: 260px; }
+
+      /* 2) Move "Лексер → Парсер → IR → Генерация кода" чуть влево */
+      .visual-right ul {
+        list-style-position: inside !important; /* bullets/markers placed inside so text aligns left */
+        padding-left: 8px !important;
+        margin-left: 0 !important;
+      }
+      .visual-right ul li { margin-left: 0; }
+
+      /* 3) Move "Модульный язык / Интерпретатор байткода / ..." тоже влево */
+      #ideas ul {
+        list-style-position: inside !important;
+        padding-left: 12px !important;
+        margin-left: 0 !important;
+      }
+      #ideas ul li { margin-left: 0; }
+
+      /* small screens: ensure legibility */
+      @media (max-width:420px){
+        .screenshot { height:130px; }
+        .visual-left .big-image { min-height:120px; }
+      }
+
     }
 
     /* Very small screens / narrow devices */
@@ -172,106 +244,6 @@
       .hero-lead{font-size:16px}
       .screenshot{height:140px}
       .header-inner{height:56px}
-    }
-
-    /* -------------------------
-       Mobile fixes (only for <=720px)
-       Narrow, targeted overrides — do not affect desktop
-       ------------------------- */
-    @media (max-width: 720px) {
-      /* 1) Force vertical stacking for the contact section (overrides inline grid)
-         and keep horizontal page padding so content isn't flush to the very edge */
-      #contact .container {
-        display: block !important;
-        grid-template-columns: none !important;
-        gap: 0 !important;
-        padding: 0 var(--pad) !important; /* <-- preserved left/right padding on mobile */
-      }
-      /* Make the two columns full-width and add sensible spacing */
-      #contact > .container > div,
-      #contact > .container > aside {
-        width: 100% !important;
-        margin: 0 0 18px 0 !important;
-      }
-
-      /* Ensure the right-side panel looks good on mobile */
-      #contact .panel.card {
-        padding: 16px;
-        box-sizing: border-box;
-      }
-
-      /* 2) Compact the top/header area on phones */
-      /* hide the subtitle to save vertical space */
-      .brand-sub {
-        display: none;
-      }
-      /* shorten / truncate the brand title (keeps desktop intact) */
-      .brand-title {
-        font-size: 15px;
-        max-width: 200px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      /* slightly reduce header height on mobile for compactness */
-      .header-inner {
-        height: 56px;
-      }
-
-      /* Make hero lead shorter visually (limit to 2 lines) */
-      .hero-lead {
-        display: -webkit-box;
-        -webkit-line-clamp: 2; /* show at most 2 lines */
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-      }
-
-      /* Allow CTAs inside small panels to become full-width if needed */
-      .panel.card .btn {
-        width: 100%;
-      }
-
-      /* keep the existing mobile-specific rules consistent */
-      .logo-mark { width:44px; height:44px; }
-      .hero-title { font-size: 28px; }
-
-      /* ============================
-         Fixes requested:
-         1) add left/right padding to header container so "PD" is not flush to the edge
-         2) reduce vertical gaps above demo images on mobile
-         3) same for second image (right panel)
-         4) move lexer/parser/IR/codegen list slightly to the left
-         ============================ */
-
-      /* 1) Ensure header respects page padding on narrow devices */
-      header.site-header .container {
-        padding-left: var(--pad) !important;
-        padding-right: var(--pad) !important;
-      }
-      /* also ensure header-inner keeps small vertical padding but not horizontal */
-      .header-inner { padding-left: 0; padding-right: 0; }
-
-      /* 2) Reduce the large top-margin for the demo card on mobile */
-      /* (the card that contains the big demo image) */
-      .demo-card {
-        margin-top: 12px !important;
-        padding-top: 16px; /* keep internal spacing comfortable */
-      }
-      /* reduce min-height of big-image on small phones to avoid large empty area */
-      .visual-left .big-image { min-height: 180px; }
-
-      /* 3) Reduce vertical spacing for the right-side screenshot (hero panel) */
-      .hero { padding: 32px 0 12px; }
-      .hero-grid { gap: 12px; }
-      .panel.card { padding: 14px; }
-      .screenshot { height: 140px; }
-
-      /* 4) Nudge the list slightly left (less indentation) */
-      .visual-right ul { margin-left: 8px !important; }
-
-      /* Keep images centered and not oversized on tiny screens */
-      .visual-left .big-image img { width:100%; object-position:center center; max-width: none; }
-
     }
 
   </style>
@@ -408,7 +380,9 @@
 
             <p class="muted" style="margin-top:8px">
               Победы в профильных конкурсах (проектная и алгоритмическая части) дают реальную возможность
-              поступать в лучшие вузы по особым правилам приёма — наш курс делает такую цель достижимой.
+              поступать в лучшие вузы без стандартной сдачи всех ЕГЭ (в рамках специальных условий приёма по результатам олимпиад).
+              Это не автоматическая гарантия — но это реальная и проверяемая возможность, и мы помогаем пройти оба компонента:
+              проектную и алгоритмическую части.
             </p>
 
             <div class="small-cta">
