@@ -163,6 +163,47 @@
 
       /* Slightly increase input size for mobile */
       input,textarea{font-size:16px;padding:14px}
+
+      /* -----------------------------
+         Mobile fixes added here:
+         1) show full demo images (no bottom crop) by switching to contain and making containers auto-height
+         2) nudge lists slightly left (less indentation)
+         These rules affect only screens <=720px and won't change desktop/pc layout.
+         ----------------------------- */
+
+      /* Make big demo image fully visible (don't crop) */
+      .visual-left .big-image{
+        /* allow the image to determine height on small screens */
+        min-height:0;
+        height:auto;
+        overflow:visible; /* allow image to be fully visible */
+      }
+      .visual-left .big-image img{
+        width:100%;
+        height:auto; /* natural height */
+        object-fit:contain; /* show full image without cropping */
+        object-position:center center;
+        max-width:100%;
+      }
+
+      /* Also ensure the right-side small screenshot shows full image */
+      .screenshot{
+        height:auto;
+        padding:12px; /* give some breathing room when image is taller */
+        overflow:visible;
+      }
+      .screenshot img{
+        width:100%;
+        height:auto;
+        object-fit:contain;
+      }
+
+      /* Nudge lists left across mobile views */
+      .visual-right ul{margin-left:6px !important}
+      /* make general lists less indented on mobile (program/ideas sections) */
+      .info-card ul, #ideas ul{margin-left:10px !important; padding-left:16px !important}
+      ul{padding-left:16px !important}
+
     }
 
     /* Very small screens / narrow devices */
