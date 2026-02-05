@@ -308,3 +308,20 @@ input,textarea,button{touch-action:manipulation}
   .screenshot{height:140px}
   .header-inner{height:56px}
 }
+
+
+/* безопасный фолбек для about-me */
+.about-inner {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.about-photo img {
+  display: block;
+  width: 220px;      /* фикс ширины, чтобы блок не "прыгал" */
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.about-info { flex: 1 1 280px; min-width: 260px; }
