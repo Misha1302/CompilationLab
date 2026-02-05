@@ -44,17 +44,6 @@
   </div>
 </header>
 
-<!-- Mobile nav drawer (hidden by default) -->
-<div class="nav-drawer" id="navDrawer" aria-hidden="true">
-  <div class="sheet" role="dialog" aria-modal="true" aria-label="Меню">
-    <nav class="nav" aria-label="Меню">
-      <a class="btn btn-ghost" href="#ideas" onclick="closeNav()">Идеи</a>
-      <a class="btn btn-primary" href="#contact" onclick="closeNav()">Консультация</a>
-      <a class="btn btn-ghost" href="#program" onclick="closeNav()">Программа</a>
-    </nav>
-  </div>
-</div>
-
 <main>
   <section class="hero">
     <div class="container hero-grid">
@@ -105,6 +94,26 @@
     </div>
   </section>
 
+  <!-- ABOUT-ME: коротко и ясно — кто ведёт курс и что даёт -->
+  <section class="about-me" aria-label="О ведущем">
+    <div class="container about-inner compact">
+      <div class="about-photo">
+        <img src="./images/portrait.jpg" alt="Портрет Миши Разакова">
+      </div>
+
+      <div class="about-info compact">
+        <h2>Миша Разаков — руководитель и преподаватель курса</h2>
+        <p class="about-fill small">Лично работаю с ребятами, которые создают сильные проекты по языкам программирования, компиляторам, JIT, или интерпретаторам.</p>
+
+        <div class="achievements-list" role="list" aria-label="Достижения">
+          <div role="listitem" class="achievement">Абсолютный победитель «Юниора»</div>
+          <div role="listitem" class="achievement">Победитель олимпиады «Неймарк»</div>
+          <div role="listitem" class="achievement">4 года опыта преподавания программирования</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- PROGRAM -->
   <section id="program" style="padding-bottom:10px">
     <div class="container">
@@ -126,7 +135,7 @@
         </div>
       </div>
 
-      <!-- demo card (added class demo-card for mobile-specific adjustments) -->
+      <!-- demo card -->
       <div style="margin-top:28px" class="info-card demo-card">
         <div class="visual-split">
           <div class="visual-left">
