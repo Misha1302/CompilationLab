@@ -34,13 +34,6 @@
       <a class="btn btn-ghost" href="#ideas">Идеи</a>
       <a class="btn btn-primary" href="#contact">Консультация</a>
     </nav>
-
-    <!-- Mobile nav toggle -->
-    <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false" id="navToggle">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
   </div>
 </header>
 
@@ -210,8 +203,8 @@
 
   <!-- CONTACT -->
   <section id="contact" style="padding-top:10px;padding-bottom:40px">
-    <div class="container" style="display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:start">
-      <div>
+    <div class="container contact-grid">
+      <div class="consultation">
         <h2 style="font-family:Merriweather;margin:0 0 8px">Записаться на консультацию</h2>
         <p class="muted" style="margin:0 0 12px">Короткая встреча (20–30 минут): я оценю уровень и предложу дорожную карту к победам и поступлению.</p>
 
@@ -238,7 +231,6 @@
 
       <aside>
         <div class="panel card" style="padding:18px">
-          <!-- Заголовок: "Что подготовить" -->
           <h3 style="margin:0 0 8px">Что подготовить</h3>
           <p class="muted" style="margin:0 0 12px">Кратко опишите уровень ученика, примеры проектов (если есть) и цели по поступлению в университет.</p>
           <div style="margin-top:10px">
@@ -262,7 +254,32 @@
   </div>
 </footer>
 
-<!-- main script -->
+<!-- Mobile header shortening script (короткая версия на <=720px) -->
+<script>
+(function(){
+  function applyMobileHeader(){
+    var mq = window.matchMedia && window.matchMedia('(max-width:720px)');
+    var title = document.querySelector('.brand-title');
+    var sub = document.querySelector('.brand-sub');
+    if(!title) return;
+
+    if(!title.dataset.full) title.dataset.full = title.textContent.trim();
+
+    if(mq && mq.matches){
+      title.textContent = 'Миша Разаков';
+      if(sub) sub.style.display = 'none';
+    } else {
+      title.textContent = title.dataset.full;
+      if(sub) sub.style.display = '';
+    }
+  }
+
+  applyMobileHeader();
+  if(window.matchMedia) window.matchMedia('(max-width:720px)').addListener(applyMobileHeader);
+})();
+</script>
+
+<!-- main script (если есть) -->
 <script src="./js/script.js"></script>
 </body>
 </html>

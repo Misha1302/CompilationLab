@@ -139,3 +139,31 @@ if(discussBtn){
     closeNav();
   });
 }
+
+
+/* === Mobile header shortening (added) === */
+(function(){
+  function applyMobileHeader(){
+    var mq = window.matchMedia && window.matchMedia('(max-width:720px)');
+    var title = document.querySelector('.brand-title');
+    var sub = document.querySelector('.brand-sub');
+    if(!title) return;
+
+    if(!title.dataset.full) title.dataset.full = title.textContent.trim();
+
+    if(mq && mq.matches){
+      // короткая версия (примерно 2 слова)
+      title.textContent = 'Миша Разаков';
+      if(sub) sub.style.display = 'none';
+    } else {
+      // восстановление оригинала на больших экранах
+      title.textContent = title.dataset.full;
+      if(sub) sub.style.display = '';
+    }
+  }
+
+  // apply on load and on change
+  applyMobileHeader();
+  if(window.matchMedia) window.matchMedia('(max-width:720px)').addListener(applyMobileHeader);
+})();
+

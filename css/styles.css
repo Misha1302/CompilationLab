@@ -73,17 +73,6 @@ header.site-header{
 }
 .nav-toggle .bar{display:block;width:22px;height:2px;background:var(--text);margin:4px 0;border-radius:2px}
 
-/* Nav drawer (hidden by default) */
-.nav-drawer{
-  display:none;position:fixed;inset:0;background:rgba(11,18,22,0.45);
-  z-index:70;align-items:flex-start;justify-content:flex-end;
-}
-.nav-drawer .sheet{
-  width:280px;background:var(--card);height:100%;padding:20px;border-left:1px solid var(--border);
-  box-shadow:-20px 0 40px rgba(11,18,22,0.06);
-}
-.nav-drawer .sheet .nav{flex-direction:column;gap:12px}
-
 /* HERO */
 .hero{padding:44px 0 20px}
 .hero-grid{display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:stretch}
@@ -112,7 +101,7 @@ header.site-header{
   box-shadow:0 8px 24px rgba(17,20,22,0.03);
 }
 .screenshot{
-  height:200px;background: linear-gradient(90deg,#f7faf9,#eef6f4);
+  height:225px;background: linear-gradient(90deg,#f7faf9,#eef6f4);
   border-radius:10px;border:1px solid rgba(0,0,0,0.03);
   display:grid;place-items:center;color:var(--muted);font-weight:600;overflow:hidden;
 }
@@ -148,6 +137,13 @@ header.site-header{
 .idea{background:var(--soft);border-radius:10px;padding:12px;border:1px solid var(--border);color:var(--muted);font-weight:600}
 
 /* CONTACT form */
+/* contact-grid: desktop layout for contact area (replaces inline grid in HTML) */
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 420px;
+  gap:24px;
+  align-items:start;
+}
 .contact-card{padding:16px;border-radius:10px;border:1px solid var(--border);background:var(--card)}
 label{display:block;font-weight:700;margin-bottom:6px}
 input,textarea{
@@ -162,31 +158,19 @@ footer{padding:30px 0;color:var(--muted);font-size:14px}
 .btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
 input,textarea,button{touch-action:manipulation}
 
-/* ABOUT-ME
-   Подогнал ширину так, чтобы блок визуально совпадал с шириной карточек ниже:
-   - внутренние отступы контейнера учитываются (var(--pad))
-   - максимальная общая ширина блока совпадает с контейнером минус отступы
-*/
+/* ABOUT-ME (desktop) */
 .about-me{margin:16px 0}
-
-/* Ключевая правка:
-   - ограничиваем максимальную ширину блока так, чтобы он визуально совпадал с двумя колонками cards-grid
-   - центрируем внутри контейнера
-   - уменьшаем внутренний padding, чтобы ширина рамки совпадала с карточками */
 .about-inner{
   display:grid;
   grid-template-columns: minmax(140px,220px) minmax(0,1fr);
   gap:16px;
   align-items:center;
 
-  /* делаем ширину такой же, как у содержимого контейнера:
-     container имеет max-width:var(--maxw) и padding: var(--pad);
-     убираем "визуальную" разницу, задав ширину равной (100% - 2*pad) */
   max-width: calc(var(--maxw) - (var(--pad) * 2));
-  margin: 0 auto; /* центрируем внутри .container */
+  margin: 0 auto;
   background:var(--card);
   border:1px solid var(--border);
-  padding:10px 12px; /* чуть меньше, чтобы не казался шире карточек */
+  padding:10px 12px;
   border-radius:10px;
   box-shadow:0 8px 20px rgba(11,18,22,0.04);
   font-size: inherit;
@@ -195,7 +179,7 @@ input,textarea,button{touch-action:manipulation}
 /* Photo */
 .about-photo img{
   width:100%;
-  max-width:220px; /* чуть уже, чтобы правая колонка совпадала по ширине с карточками */
+  max-width:220px;
   aspect-ratio:1/1;
   object-fit:cover;
   border-radius:10px;
@@ -206,29 +190,30 @@ input,textarea,button{touch-action:manipulation}
 
 /* Info column — flex to allow vertical centering and predictable shrinking */
 .about-info.compact{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  min-width:0;
-  width:100%;
-  padding-right:6px;
+  background:var(--card);border:1px solid var(--border);padding:18px;border-radius:10px;
+  box-shadow:0 8px 20px rgba(17,20,22,0.03);
 }
 .about-info.compact h2{
   margin:0 0 6px;
   font-family:Merriweather;
   font-size:20px;
 }
-/* allow text to fill the column (no max-width) */
 .about-fill{
   margin:0 0 10px;
   color:var(--muted);
   font-size:0.95em;
   line-height:1.5;
   max-width:none;
+  margin-right: 8px;
+}
+
+.panel.card{
+  background:var(--card);border:1px solid var(--border);padding:18px;border-radius:10px;
+  box-shadow:0 8px 20px rgba(17,20,22,0.03);
 }
 
 /* Achievements */
-.achievements-list{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.achievements-list{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px; margin-right: 8px; margin-bottom: 8px; }
 .achievement{
   background:var(--soft);border:1px solid var(--border);padding:10px 12px;border-radius:10px;
   font-weight:600;font-size:inherit;color:var(--accent);display:inline-flex;align-items:center;white-space:nowrap;min-width:0;
@@ -236,7 +221,6 @@ input,textarea,button{touch-action:manipulation}
 
 /* Responsive behavior */
 @media (min-width: 1200px){
-  /* На очень широких экранах немного увеличим отступы у карточек, чтобы визуальное соответствие было точнее */
   .cards-grid{gap:20px}
   .info-card{padding:20px}
   .about-inner{padding:12px 14px}
@@ -247,12 +231,21 @@ input,textarea,button{touch-action:manipulation}
   .visual-left{flex:0 0 auto}
   .visual-right{flex:0 0 auto}
   .cards-grid{grid-template-columns:1fr}
-  /* при сужении экрана убираем ограничение max-width, чтобы блок использовал всю доступную ширину */
   .about-inner{max-width:none;margin:0;padding:10px;grid-template-columns:140px 1fr}
   .about-photo img{max-width:140px}
 }
 
+
+/* === MOBILE (самые последние правила — чтобы переопределить приоритеты) === */
 @media (max-width:720px){
+  .about-fill{
+    margin-left: 8px;
+  }
+
+  .achievements-list{
+    margin-left: 8px;
+  }
+
   .header-inner{height:64px;padding:8px 0}
   .hero-grid{grid-template-columns:1fr}
   .hero-title{font-size:26px}
@@ -261,19 +254,42 @@ input,textarea,button{touch-action:manipulation}
   .visual-left .big-image{border-radius:18px}
   .visual-left .big-image img{width:100%;object-position:center center}
 
-  /* About-me responsive: photo меньше, блок занимает полную ширину контейнера */
-  .about-inner{grid-template-columns:120px 1fr; gap:12px; padding:10px}
-  .about-photo img{width:120px;height:120px;aspect-ratio:1/1;object-fit:cover}
-  .about-info.compact h2{font-size:18px}
-  .about-fill.small{font-size:0.95em}
-  .achievement{padding:8px 10px;font-size:15px}
+  /* Header: короткая версия — скрываем подзаголовок (JS тоже меняет текст) */
+  .brand-sub{display:none}
+
+  /* About-me: фото во всю ширину, текст под ней; подгоняем визуально под .info-card (одинаковые отступы/фон/граница) */
+  .about-inner{
+    display:block;
+    padding:18px;          /* совпадает с .info-card */
+    margin:12px 0;         /* отступ как у карточек */
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    box-shadow:0 8px 20px rgba(11,18,22,0.04);
+  }
+  .about-photo{width:100%;margin:0 0 12px}
+  .about-photo img{width:100%;max-width:none;height:auto;border-radius:8px;display:block}
+  .about-info.compact{width:100%;padding:0;margin:0}
+  .about-info.compact h2{margin-bottom:8px; margin-left: 8px; margin-right: 8px; margin-top: 8px;}
+
+  /* CONTACT: переходим в колонку и делаем aside первым */
+  .contact-grid{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:18px;
+    padding:0;
+    margin-left: 20px; 
+    margin-right: 20px;
+  }
+  #contact > .container > aside{order:-1;width:100%;margin:0}
+  #contact > .container > div{order:0;width:100%;margin:0}
 
   /* Mobile nav: hide desktop nav, show toggle */
   .nav{display:none}
   .nav-toggle{display:inline-flex}
 
   /* Right panel compresses */
-  .panel.card{padding:14px}
+  .panel.card{padding:14px;}
   .screenshot{height:150px}
 
   /* Buttons full width on mobile */
@@ -281,7 +297,7 @@ input,textarea,button{touch-action:manipulation}
   .small-cta{flex-direction:column}
   .hero-badges{flex-direction:column;align-items:flex-start}
 
-  /* Contact layout stacks */
+  /* Contact layout stacks (now driven by contact-grid) */
   #contact .container{display:block;padding:0}
   #contact > .container > div, #contact > .container > aside{width:100%;margin-bottom:18px}
 
@@ -308,20 +324,3 @@ input,textarea,button{touch-action:manipulation}
   .screenshot{height:140px}
   .header-inner{height:56px}
 }
-
-
-/* безопасный фолбек для about-me */
-.about-inner {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.about-photo img {
-  display: block;
-  width: 220px;      /* фикс ширины, чтобы блок не "прыгал" */
-  height: auto;
-  border-radius: 8px;
-  object-fit: cover;
-}
-.about-info { flex: 1 1 280px; min-width: 260px; }
